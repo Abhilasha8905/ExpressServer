@@ -4,8 +4,8 @@ const request = require('request');
 const app = express();
 const port = process.env.PORT || 5001;
 var bodyParser = require('body-parser')
-app.use(bodyParser.json({limit: '50mb'}));
-app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
+app.use(bodyParser.json({limit: '100mb'}));
+app.use(bodyParser.urlencoded({limit: '100mb', extended: true}));
 app.get('/', (req, res) => res.send('Hello World!'));
 
 app.post('/upload-image', (req, res) => {
