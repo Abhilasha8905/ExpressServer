@@ -16,7 +16,7 @@ app.get('/', (req, res) => res.send('Hello World!'));
 function slackUploadImage(base64Image) {
     try {
         return new Promise((resolve, reject) => {
-            require('fs').writeFileSync('image.png', imgAsBase64, 'base64', (err) => {
+            require('fs').writeFileSync('image.jpeg', imgAsBase64, 'base64', (err) => {
                 if (err) {
                     console.error('writeFileSync >> error', err);
                     return reject(err);
@@ -27,10 +27,10 @@ function slackUploadImage(base64Image) {
             const formData = {
                 token: slackToken,
                 tile: "Image",
-                filename: "image.png",
+                filename: "image.jpeg",
                 filetype: "auto",
                 channels: "tryextension",
-                file: require('fs').createReadStream('./image.png'),
+                file: require('fs').createReadStream('./image.jpeg'),
             };
             request.post({ url: 'https://slack.com/api/files.upload', formData }, function(err, response) {
                 if (err) {
