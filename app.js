@@ -16,7 +16,7 @@ app.get('/', (req, res) => res.send('Hello World!'));
 function slackUploadImage(base64Image) {
     try {
         return new Promise((resolve, reject) => {
-            require('fs').writeFileSync('image.jpeg', imgAsBase64, 'base64', (err) => {
+            require('fs').writeFileSync('image.jpeg', base64Image, 'base64', (err) => {
                 if (err) {
                     console.error('writeFileSync >> error', err);
                     return reject(err);
