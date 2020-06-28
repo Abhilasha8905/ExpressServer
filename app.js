@@ -5,6 +5,7 @@ const bodyParser = require('body-parser')
 
 const app = express();
 const port = process.env.PORT || 5001;
+const slackToken = process.env.SLACK_TOKEN;
 
 
 app.use(bodyParser.json({limit: '100mb'}));
@@ -24,7 +25,7 @@ function slackUploadImage(base64Image) {
                 }
             });
             const formData = {
-                token: "xoxp-1210469697171-1195518745367-1210266478946-e2d92ef6406fbfee40888a53ec1db7b5",
+                token: slackToken,
                 tile: "Image",
                 filename: "image.png",
                 filetype: "auto",
@@ -37,7 +38,7 @@ function slackUploadImage(base64Image) {
                     return reject(err);
                 }
                 console.log('Slack Image Upload Success ', response.body);
-                return resolve({ message: 'done' });
+                return resolve(response.body);
             });
         });
     } catch(error) {
@@ -51,4 +52,4 @@ app.post('/upload-image', async (req, res) => {
     return res.send(result);
 });
 
-app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`))
+app.listen(port, () => console.log(`Application Express Server is up and running`))
